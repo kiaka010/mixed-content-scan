@@ -24,7 +24,8 @@ class DOMDocument extends \DOMDocument
         'param'  => ['value'],
         'script' => ['src'],
         'source' => ['src', 'srcset'],
-        'video'  => ['src']
+        'video'  => ['src'],
+        'div'    => ['data-url']
     ];
 
     /**
