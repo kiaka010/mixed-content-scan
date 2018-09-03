@@ -18,6 +18,18 @@ class Scanner
     private $crawl = true;
 
     /**
+     * Set which tags to ignore
+     * @var array
+     */
+    private $ignoreTags = [];
+
+    /**
+     * Should random query be added to the end of the urls to bust through cache
+     * @var bool
+     */
+    private $cacheBust = false;
+
+    /**
      * Do we check the certificates for being valid or not (false = allow self signed, or missing certificates)
      * @var boolean
      */
@@ -187,7 +199,9 @@ class Scanner
         while (true) {
             // Get the current pageUrl
             $curPageUrl = $this->pages[$curPageIndex];
-
+            if($this->cacheBust) {
+                $curPageUrl .= '?' . rand(0, 9);
+            }
             // Scan a single page. Returns the mixed content (if any)
             $mixedContent = $this->scanPage($curPageUrl);
 
@@ -246,7 +260,7 @@ class Scanner
             }
 
             // Extract mixedContent and return it
-            return $doc->extractMixedContentUrls();
+            return $doc->extractMixedContentUrls($this->ignoreTags);
         }
 
         // No result
@@ -449,6 +463,14 @@ class Scanner
     }
 
     /**
+     * @param array $ignoreTags
+     */
+    public function setIgnoreTags($ignoreTags)
+    {
+        $this->ignoreTags = $ignoreTags;
+    }
+
+    /**
      * Get checkCertificate value
      * @return boolean
      */
@@ -495,6 +517,11 @@ class Scanner
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+    }
+
+    public function setCacheBust($cacheBust)
+    {
+        $this->cacheBust = $cacheBust;
     }
 
     /**

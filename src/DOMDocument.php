@@ -51,7 +51,7 @@ class DOMDocument extends \DOMDocument
      *
      * @return array URLs
      */
-    public function extractMixedContentUrls()
+    public function extractMixedContentUrls($ignoreTags)
     {
         // Array holding all URLs which are found to be Mixed Content
         // We'll return this one at the very end
@@ -60,6 +60,9 @@ class DOMDocument extends \DOMDocument
         // Loop through all the tags and attributes we want to find
         // references to mixed content
         foreach ($this->tags as $tag => $attributes) {
+            if (in_array($tag, $ignoreTags)) {
+                continue;
+            }
             /** @var \DOMElement $el */
             foreach ($this->getElementsByTagName($tag) as $el) {
                 /** @var array $attributes */

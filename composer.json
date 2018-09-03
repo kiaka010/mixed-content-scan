@@ -1,5 +1,5 @@
 {
-    "name": "bramus/mixed-content-scan",
+    "name": "kiaka010/mixed-content-scan",
     "description": "Scan your HTTPS-enabled website for Mixed Content",
     "license": "MIT",
     "authors": [
@@ -7,6 +7,10 @@
             "name": "Bramus Van Damme",
             "email": "bramus@bram.us",
             "homepage": "https://www.bram.us/"
+        },
+        {
+            "name": "Christopher Smith",
+            "email": "kiaka010@gmail.com"
         }
     ],
     "require": {
@@ -21,6 +25,6 @@
         }
     },
     "bin": [
-        "bin/mixed-content-scan"
+        "bin/sdc-mixed-content-scan"
     ]
 }
